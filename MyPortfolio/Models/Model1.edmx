@@ -1,0 +1,482 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PortfoliomModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AboutDiv">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="800" />
+          <Property Name="AboutItemID" Type="int" />
+        </EntityType>
+        <EntityType Name="AboutItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="50" />
+          <Property Name="Header" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="AuthorNews">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fullame" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="250" />
+          <Property Name="AuthorPhoto" Type="nvarchar" MaxLength="800" />
+        </EntityType>
+        <EntityType Name="BlogCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Blogs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Header" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="800" />
+          <Property Name="AuthorID" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CategoryID" Type="int" />
+        </EntityType>
+        <EntityType Name="CategoryWork">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MyWorksDiv">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="800" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="CategoryID" Type="int" />
+        </EntityType>
+        <EntityType Name="Section1Div">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="800" />
+          <Property Name="Header" Type="nvarchar" MaxLength="150" />
+          <Property Name="Title" Type="nvarchar" MaxLength="150" />
+          <Property Name="Subtitle" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="ServicesDiv">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Icons" Type="nvarchar" MaxLength="50" />
+          <Property Name="Header" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Testimony">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Header" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+          <Property Name="AuthorName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_AboutDiv_AboutItems">
+          <End Role="AboutItems" Type="Self.AboutItems" Multiplicity="0..1" />
+          <End Role="AboutDiv" Type="Self.AboutDiv" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AboutItems">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AboutDiv">
+              <PropertyRef Name="AboutItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Blogs_AuthorNews">
+          <End Role="AuthorNews" Type="Self.AuthorNews" Multiplicity="0..1" />
+          <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AuthorNews">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Blogs">
+              <PropertyRef Name="AuthorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Blogs_BlogCategory">
+          <End Role="BlogCategory" Type="Self.BlogCategory" Multiplicity="0..1" />
+          <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Blogs">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyWorksDiv_CategoryWork">
+          <End Role="CategoryWork" Type="Self.CategoryWork" Multiplicity="0..1" />
+          <End Role="MyWorksDiv" Type="Self.MyWorksDiv" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryWork">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MyWorksDiv">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PortfoliomModelStoreContainer">
+          <EntitySet Name="AboutDiv" EntityType="Self.AboutDiv" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AboutItems" EntityType="Self.AboutItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AuthorNews" EntityType="Self.AuthorNews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlogCategory" EntityType="Self.BlogCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Blogs" EntityType="Self.Blogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoryWork" EntityType="Self.CategoryWork" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MyWorksDiv" EntityType="Self.MyWorksDiv" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Section1Div" EntityType="Self.Section1Div" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServicesDiv" EntityType="Self.ServicesDiv" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Testimony" EntityType="Self.Testimony" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AboutDiv_AboutItems" Association="Self.FK_AboutDiv_AboutItems">
+            <End Role="AboutItems" EntitySet="AboutItems" />
+            <End Role="AboutDiv" EntitySet="AboutDiv" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Blogs_AuthorNews" Association="Self.FK_Blogs_AuthorNews">
+            <End Role="AuthorNews" EntitySet="AuthorNews" />
+            <End Role="Blogs" EntitySet="Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Blogs_BlogCategory" Association="Self.FK_Blogs_BlogCategory">
+            <End Role="BlogCategory" EntitySet="BlogCategory" />
+            <End Role="Blogs" EntitySet="Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyWorksDiv_CategoryWork" Association="Self.FK_MyWorksDiv_CategoryWork">
+            <End Role="CategoryWork" EntitySet="CategoryWork" />
+            <End Role="MyWorksDiv" EntitySet="MyWorksDiv" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PortfoliomModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AboutDiv">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Photo" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="AboutItemID" Type="Int32" />
+          <NavigationProperty Name="AboutItem" Relationship="Self.FK_AboutDiv_AboutItems" FromRole="AboutDiv" ToRole="AboutItems" />
+        </EntityType>
+        <EntityType Name="AboutItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AboutDivs" Relationship="Self.FK_AboutDiv_AboutItems" FromRole="AboutItems" ToRole="AboutDiv" />
+        </EntityType>
+        <EntityType Name="AuthorNew">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fullame" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AuthorPhoto" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Blogs" Relationship="Self.FK_Blogs_AuthorNews" FromRole="AuthorNews" ToRole="Blogs" />
+        </EntityType>
+        <EntityType Name="BlogCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Blogs" Relationship="Self.FK_Blogs_BlogCategory" FromRole="BlogCategory" ToRole="Blogs" />
+        </EntityType>
+        <EntityType Name="Blog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="AuthorID" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CategoryID" Type="Int32" />
+          <NavigationProperty Name="AuthorNew" Relationship="Self.FK_Blogs_AuthorNews" FromRole="Blogs" ToRole="AuthorNews" />
+          <NavigationProperty Name="BlogCategory" Relationship="Self.FK_Blogs_BlogCategory" FromRole="Blogs" ToRole="BlogCategory" />
+        </EntityType>
+        <EntityType Name="CategoryWork">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MyWorksDivs" Relationship="Self.FK_MyWorksDiv_CategoryWork" FromRole="CategoryWork" ToRole="MyWorksDiv" />
+        </EntityType>
+        <EntityType Name="MyWorksDiv">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Photo" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryID" Type="Int32" />
+          <NavigationProperty Name="CategoryWork" Relationship="Self.FK_MyWorksDiv_CategoryWork" FromRole="MyWorksDiv" ToRole="CategoryWork" />
+        </EntityType>
+        <EntityType Name="Section1Div">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Photo" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="Header" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Subtitle" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ServicesDiv">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Icons" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Testimony">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="AuthorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_AboutDiv_AboutItems">
+          <End Role="AboutItems" Type="Self.AboutItem" Multiplicity="0..1" />
+          <End Role="AboutDiv" Type="Self.AboutDiv" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AboutItems">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AboutDiv">
+              <PropertyRef Name="AboutItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Blogs_AuthorNews">
+          <End Role="AuthorNews" Type="Self.AuthorNew" Multiplicity="0..1" />
+          <End Role="Blogs" Type="Self.Blog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AuthorNews">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Blogs">
+              <PropertyRef Name="AuthorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Blogs_BlogCategory">
+          <End Role="BlogCategory" Type="Self.BlogCategory" Multiplicity="0..1" />
+          <End Role="Blogs" Type="Self.Blog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Blogs">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyWorksDiv_CategoryWork">
+          <End Role="CategoryWork" Type="Self.CategoryWork" Multiplicity="0..1" />
+          <End Role="MyWorksDiv" Type="Self.MyWorksDiv" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryWork">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MyWorksDiv">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PortfolioDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AboutDivs" EntityType="Self.AboutDiv" />
+          <EntitySet Name="AboutItems" EntityType="Self.AboutItem" />
+          <EntitySet Name="AuthorNews" EntityType="Self.AuthorNew" />
+          <EntitySet Name="BlogCategories" EntityType="Self.BlogCategory" />
+          <EntitySet Name="Blogs" EntityType="Self.Blog" />
+          <EntitySet Name="CategoryWorks" EntityType="Self.CategoryWork" />
+          <EntitySet Name="MyWorksDivs" EntityType="Self.MyWorksDiv" />
+          <EntitySet Name="Section1Div" EntityType="Self.Section1Div" />
+          <EntitySet Name="ServicesDivs" EntityType="Self.ServicesDiv" />
+          <EntitySet Name="Testimonies" EntityType="Self.Testimony" />
+          <AssociationSet Name="FK_AboutDiv_AboutItems" Association="Self.FK_AboutDiv_AboutItems">
+            <End Role="AboutItems" EntitySet="AboutItems" />
+            <End Role="AboutDiv" EntitySet="AboutDivs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Blogs_AuthorNews" Association="Self.FK_Blogs_AuthorNews">
+            <End Role="AuthorNews" EntitySet="AuthorNews" />
+            <End Role="Blogs" EntitySet="Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Blogs_BlogCategory" Association="Self.FK_Blogs_BlogCategory">
+            <End Role="BlogCategory" EntitySet="BlogCategories" />
+            <End Role="Blogs" EntitySet="Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyWorksDiv_CategoryWork" Association="Self.FK_MyWorksDiv_CategoryWork">
+            <End Role="CategoryWork" EntitySet="CategoryWorks" />
+            <End Role="MyWorksDiv" EntitySet="MyWorksDivs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PortfoliomModelStoreContainer" CdmEntityContainer="PortfolioDB">
+          <EntitySetMapping Name="AboutDivs">
+            <EntityTypeMapping TypeName="PortfoliomModel.AboutDiv">
+              <MappingFragment StoreEntitySet="AboutDiv">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="AboutItemID" ColumnName="AboutItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AboutItems">
+            <EntityTypeMapping TypeName="PortfoliomModel.AboutItem">
+              <MappingFragment StoreEntitySet="AboutItems">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Header" ColumnName="Header" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuthorNews">
+            <EntityTypeMapping TypeName="PortfoliomModel.AuthorNew">
+              <MappingFragment StoreEntitySet="AuthorNews">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Fullame" ColumnName="Fullame" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="AuthorPhoto" ColumnName="AuthorPhoto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogCategories">
+            <EntityTypeMapping TypeName="PortfoliomModel.BlogCategory">
+              <MappingFragment StoreEntitySet="BlogCategory">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Blogs">
+            <EntityTypeMapping TypeName="PortfoliomModel.Blog">
+              <MappingFragment StoreEntitySet="Blogs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Header" ColumnName="Header" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryWorks">
+            <EntityTypeMapping TypeName="PortfoliomModel.CategoryWork">
+              <MappingFragment StoreEntitySet="CategoryWork">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MyWorksDivs">
+            <EntityTypeMapping TypeName="PortfoliomModel.MyWorksDiv">
+              <MappingFragment StoreEntitySet="MyWorksDiv">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Section1Div">
+            <EntityTypeMapping TypeName="PortfoliomModel.Section1Div">
+              <MappingFragment StoreEntitySet="Section1Div">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Header" ColumnName="Header" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Subtitle" ColumnName="Subtitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServicesDivs">
+            <EntityTypeMapping TypeName="PortfoliomModel.ServicesDiv">
+              <MappingFragment StoreEntitySet="ServicesDiv">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Icons" ColumnName="Icons" />
+                <ScalarProperty Name="Header" ColumnName="Header" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Testimonies">
+            <EntityTypeMapping TypeName="PortfoliomModel.Testimony">
+              <MappingFragment StoreEntitySet="Testimony">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Header" ColumnName="Header" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AuthorName" ColumnName="AuthorName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
