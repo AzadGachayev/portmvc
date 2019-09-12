@@ -17,13 +17,13 @@ namespace MyPortfolio.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CategoryWork()
         {
-            this.MyWorksDivs = new HashSet<MyWorksDiv>();
+            this.MyWorksDiv = new HashSet<MyWorksDiv>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MyWorksDiv> MyWorksDivs { get; set; }
+        public virtual ICollection<MyWorksDiv> MyWorksDiv { get; set; }
     }
 }

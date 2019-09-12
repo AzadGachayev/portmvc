@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PortfolioModelStoreContainer" CdmEntityContainer="MyPortfolioDB">
+    <EntitySetMapping Name="AboutDiv">
+      <EntityTypeMapping TypeName="PortfolioModel.AboutDiv">
+        <MappingFragment StoreEntitySet="AboutDiv">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="AboutItemID" ColumnName="AboutItemID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AboutItems">
+      <EntityTypeMapping TypeName="PortfolioModel.AboutItems">
+        <MappingFragment StoreEntitySet="AboutItems">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="Header" ColumnName="Header" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AuthorNews">
+      <EntityTypeMapping TypeName="PortfolioModel.AuthorNews">
+        <MappingFragment StoreEntitySet="AuthorNews">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="AuthorPhoto" ColumnName="AuthorPhoto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BlogCategory">
+      <EntityTypeMapping TypeName="PortfolioModel.BlogCategory">
+        <MappingFragment StoreEntitySet="BlogCategory">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Blogs">
+      <EntityTypeMapping TypeName="PortfolioModel.Blogs">
+        <MappingFragment StoreEntitySet="Blogs">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Header" ColumnName="Header" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
+          <ScalarProperty Name="Createdate" ColumnName="Createdate" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategoryWork">
+      <EntityTypeMapping TypeName="PortfolioModel.CategoryWork">
+        <MappingFragment StoreEntitySet="CategoryWork">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MyWorksDiv">
+      <EntityTypeMapping TypeName="PortfolioModel.MyWorksDiv">
+        <MappingFragment StoreEntitySet="MyWorksDiv">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Section1Div">
+      <EntityTypeMapping TypeName="PortfolioModel.Section1Div">
+        <MappingFragment StoreEntitySet="Section1Div">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Header" ColumnName="Header" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Subtitle" ColumnName="Subtitle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServicesDiv">
+      <EntityTypeMapping TypeName="PortfolioModel.ServicesDiv">
+        <MappingFragment StoreEntitySet="ServicesDiv">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Icons" ColumnName="Icons" />
+          <ScalarProperty Name="Header" ColumnName="Header" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Testimony">
+      <EntityTypeMapping TypeName="PortfolioModel.Testimony">
+        <MappingFragment StoreEntitySet="Testimony">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Header" ColumnName="Header" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AuthorName" ColumnName="AuthorName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

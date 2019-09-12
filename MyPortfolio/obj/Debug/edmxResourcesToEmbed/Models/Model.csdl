@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PortfolioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AboutDiv">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Photo" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+    <Property Name="AboutItemID" Type="Int32" />
+    <NavigationProperty Name="AboutItems" Relationship="Self.FK_AboutDiv_AboutItems" FromRole="AboutDiv" ToRole="AboutItems" />
+  </EntityType>
+  <EntityType Name="AboutItems">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AboutDiv" Relationship="Self.FK_AboutDiv_AboutItems" FromRole="AboutItems" ToRole="AboutDiv" />
+  </EntityType>
+  <EntityType Name="AuthorNews">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="AuthorPhoto" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Blogs" Relationship="Self.FK_Blogs_AuthorNews" FromRole="AuthorNews" ToRole="Blogs" />
+  </EntityType>
+  <EntityType Name="BlogCategory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Blogs" Relationship="Self.FK_Blogs_BlogCategory" FromRole="BlogCategory" ToRole="Blogs" />
+  </EntityType>
+  <EntityType Name="Blogs">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Photo" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+    <Property Name="AuthorID" Type="Int32" />
+    <Property Name="Createdate" Type="DateTime" Precision="3" />
+    <Property Name="CategoryId" Type="Int32" />
+    <NavigationProperty Name="AuthorNews" Relationship="Self.FK_Blogs_AuthorNews" FromRole="Blogs" ToRole="AuthorNews" />
+    <NavigationProperty Name="BlogCategory" Relationship="Self.FK_Blogs_BlogCategory" FromRole="Blogs" ToRole="BlogCategory" />
+  </EntityType>
+  <EntityType Name="CategoryWork">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MyWorksDiv" Relationship="Self.FK_MyWorksDiv_CategoryWork" FromRole="CategoryWork" ToRole="MyWorksDiv" />
+  </EntityType>
+  <EntityType Name="MyWorksDiv">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Photo" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryID" Type="Int32" />
+    <NavigationProperty Name="CategoryWork" Relationship="Self.FK_MyWorksDiv_CategoryWork" FromRole="MyWorksDiv" ToRole="CategoryWork" />
+  </EntityType>
+  <EntityType Name="Section1Div">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Photo" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+    <Property Name="Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Subtitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ServicesDiv">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Icons" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Header" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Testimony">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="AuthorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_AboutDiv_AboutItems">
+    <End Role="AboutItems" Type="Self.AboutItems" Multiplicity="0..1" />
+    <End Role="AboutDiv" Type="Self.AboutDiv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AboutItems">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AboutDiv">
+        <PropertyRef Name="AboutItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Blogs_AuthorNews">
+    <End Role="AuthorNews" Type="Self.AuthorNews" Multiplicity="0..1" />
+    <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AuthorNews">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Blogs">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Blogs_BlogCategory">
+    <End Role="BlogCategory" Type="Self.BlogCategory" Multiplicity="0..1" />
+    <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BlogCategory">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Blogs">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MyWorksDiv_CategoryWork">
+    <End Role="CategoryWork" Type="Self.CategoryWork" Multiplicity="0..1" />
+    <End Role="MyWorksDiv" Type="Self.MyWorksDiv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoryWork">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MyWorksDiv">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MyPortfolioDB" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AboutDiv" EntityType="Self.AboutDiv" />
+    <EntitySet Name="AboutItems" EntityType="Self.AboutItems" />
+    <EntitySet Name="AuthorNews" EntityType="Self.AuthorNews" />
+    <EntitySet Name="BlogCategory" EntityType="Self.BlogCategory" />
+    <EntitySet Name="Blogs" EntityType="Self.Blogs" />
+    <EntitySet Name="CategoryWork" EntityType="Self.CategoryWork" />
+    <EntitySet Name="MyWorksDiv" EntityType="Self.MyWorksDiv" />
+    <EntitySet Name="Section1Div" EntityType="Self.Section1Div" />
+    <EntitySet Name="ServicesDiv" EntityType="Self.ServicesDiv" />
+    <EntitySet Name="Testimony" EntityType="Self.Testimony" />
+    <AssociationSet Name="FK_AboutDiv_AboutItems" Association="Self.FK_AboutDiv_AboutItems">
+      <End Role="AboutItems" EntitySet="AboutItems" />
+      <End Role="AboutDiv" EntitySet="AboutDiv" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Blogs_AuthorNews" Association="Self.FK_Blogs_AuthorNews">
+      <End Role="AuthorNews" EntitySet="AuthorNews" />
+      <End Role="Blogs" EntitySet="Blogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Blogs_BlogCategory" Association="Self.FK_Blogs_BlogCategory">
+      <End Role="BlogCategory" EntitySet="BlogCategory" />
+      <End Role="Blogs" EntitySet="Blogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MyWorksDiv_CategoryWork" Association="Self.FK_MyWorksDiv_CategoryWork">
+      <End Role="CategoryWork" EntitySet="CategoryWork" />
+      <End Role="MyWorksDiv" EntitySet="MyWorksDiv" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

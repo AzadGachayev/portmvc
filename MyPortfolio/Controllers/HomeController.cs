@@ -9,12 +9,13 @@ namespace MyPortfolio.Controllers
 {
     public class HomeController : Controller
     {
-        PortfolioDB DB = new PortfolioDB();
+        MyPortfolioDB DB = new MyPortfolioDB();
         public ActionResult Index()
         {
             ViewBag.Section1 = DB.Section1Div.Find(1);
-            ViewBag.workCat = DB.CategoryWorks.ToList();
-            ViewBag.workList = DB.MyWorksDivs.ToList();
+            ViewBag.workCat = DB.CategoryWork.ToList();
+            ViewBag.workList = DB.MyWorksDiv.ToList();
+            ViewBag.service = DB.ServicesDiv.ToList();
             return View();
         }
 

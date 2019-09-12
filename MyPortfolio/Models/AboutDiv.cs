@@ -18,6 +18,6 @@ namespace MyPortfolio.Models
         public string Photo { get; set; }
         public Nullable<int> AboutItemID { get; set; }
     
-        public virtual AboutItem AboutItem { get; set; }
+        public virtual AboutItems AboutItems { get; set; }
     }
 }
