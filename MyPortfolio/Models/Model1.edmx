@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PortfoliomModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PortfolioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AboutDiv">
           <Key>
             <PropertyRef Name="ID" />
@@ -20,23 +20,23 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Icon" Type="nvarchar" MaxLength="50" />
           <Property Name="Header" Type="nvarchar" MaxLength="50" />
-          <Property Name="Description" Type="nvarchar" MaxLength="300" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="AuthorNews">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Fullame" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fullname" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="250" />
-          <Property Name="AuthorPhoto" Type="nvarchar" MaxLength="800" />
+          <Property Name="AuthorPhoto" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="BlogCategory">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Blogs">
@@ -45,11 +45,11 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Header" Type="nvarchar" MaxLength="50" />
-          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
           <Property Name="Photo" Type="nvarchar" MaxLength="800" />
           <Property Name="AuthorID" Type="int" />
-          <Property Name="CreateDate" Type="datetime" />
-          <Property Name="CategoryID" Type="int" />
+          <Property Name="Createdate" Type="datetime" />
+          <Property Name="CategoryId" Type="int" />
         </EntityType>
         <EntityType Name="CategoryWork">
           <Key>
@@ -64,7 +64,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Photo" Type="nvarchar" MaxLength="800" />
-          <Property Name="Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="CategoryID" Type="int" />
         </EntityType>
         <EntityType Name="Section1Div">
@@ -73,18 +73,28 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Photo" Type="nvarchar" MaxLength="800" />
-          <Property Name="Header" Type="nvarchar" MaxLength="150" />
-          <Property Name="Title" Type="nvarchar" MaxLength="150" />
-          <Property Name="Subtitle" Type="nvarchar" MaxLength="150" />
+          <Property Name="Header" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Subtitle" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ServicesDiv">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Icons" Type="nvarchar" MaxLength="50" />
-          <Property Name="Header" Type="nvarchar" MaxLength="50" />
+          <Property Name="Icons" Type="nvarchar" MaxLength="150" />
+          <Property Name="Header" Type="nvarchar" MaxLength="150" />
           <Property Name="Description" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Portfolio.dbo.Settings' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Testimony">
           <Key>
@@ -127,7 +137,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Blogs">
-              <PropertyRef Name="CategoryID" />
+              <PropertyRef Name="CategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -143,7 +153,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PortfoliomModelStoreContainer">
+        <EntityContainer Name="PortfolioModelStoreContainer">
           <EntitySet Name="AboutDiv" EntityType="Self.AboutDiv" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AboutItems" EntityType="Self.AboutItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuthorNews" EntityType="Self.AuthorNews" Schema="dbo" store:Type="Tables" />
@@ -154,6 +164,13 @@
           <EntitySet Name="Section1Div" EntityType="Self.Section1Div" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServicesDiv" EntityType="Self.ServicesDiv" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Testimony" EntityType="Self.Testimony" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Settings].[ID] AS [ID], 
+    [Settings].[Email] AS [Email], 
+    [Settings].[Password] AS [Password]
+    FROM [dbo].[Settings] AS [Settings]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_AboutDiv_AboutItems" Association="Self.FK_AboutDiv_AboutItems">
             <End Role="AboutItems" EntitySet="AboutItems" />
             <End Role="AboutDiv" EntitySet="AboutDiv" />
@@ -175,7 +192,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="PortfoliomModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="PortfolioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="AboutDiv">
           <Key>
             <PropertyRef Name="ID" />
@@ -183,49 +200,49 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Photo" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
           <Property Name="AboutItemID" Type="Int32" />
-          <NavigationProperty Name="AboutItem" Relationship="Self.FK_AboutDiv_AboutItems" FromRole="AboutDiv" ToRole="AboutItems" />
+          <NavigationProperty Name="AboutItems" Relationship="Self.FK_AboutDiv_AboutItems" FromRole="AboutDiv" ToRole="AboutItems" />
         </EntityType>
-        <EntityType Name="AboutItem">
+        <EntityType Name="AboutItems">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AboutDivs" Relationship="Self.FK_AboutDiv_AboutItems" FromRole="AboutItems" ToRole="AboutDiv" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AboutDiv" Relationship="Self.FK_AboutDiv_AboutItems" FromRole="AboutItems" ToRole="AboutDiv" />
         </EntityType>
-        <EntityType Name="AuthorNew">
+        <EntityType Name="AuthorNews">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Fullame" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="AuthorPhoto" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="AuthorPhoto" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Blogs" Relationship="Self.FK_Blogs_AuthorNews" FromRole="AuthorNews" ToRole="Blogs" />
         </EntityType>
         <EntityType Name="BlogCategory">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Blogs" Relationship="Self.FK_Blogs_BlogCategory" FromRole="BlogCategory" ToRole="Blogs" />
         </EntityType>
-        <EntityType Name="Blog">
+        <EntityType Name="Blogs">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Photo" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
           <Property Name="AuthorID" Type="Int32" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="CategoryID" Type="Int32" />
-          <NavigationProperty Name="AuthorNew" Relationship="Self.FK_Blogs_AuthorNews" FromRole="Blogs" ToRole="AuthorNews" />
+          <Property Name="Createdate" Type="DateTime" Precision="3" />
+          <Property Name="CategoryId" Type="Int32" />
+          <NavigationProperty Name="AuthorNews" Relationship="Self.FK_Blogs_AuthorNews" FromRole="Blogs" ToRole="AuthorNews" />
           <NavigationProperty Name="BlogCategory" Relationship="Self.FK_Blogs_BlogCategory" FromRole="Blogs" ToRole="BlogCategory" />
         </EntityType>
         <EntityType Name="CategoryWork">
@@ -234,7 +251,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="MyWorksDivs" Relationship="Self.FK_MyWorksDiv_CategoryWork" FromRole="CategoryWork" ToRole="MyWorksDiv" />
+          <NavigationProperty Name="MyWorksDiv" Relationship="Self.FK_MyWorksDiv_CategoryWork" FromRole="CategoryWork" ToRole="MyWorksDiv" />
         </EntityType>
         <EntityType Name="MyWorksDiv">
           <Key>
@@ -242,7 +259,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Photo" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CategoryID" Type="Int32" />
           <NavigationProperty Name="CategoryWork" Relationship="Self.FK_MyWorksDiv_CategoryWork" FromRole="MyWorksDiv" ToRole="CategoryWork" />
         </EntityType>
@@ -252,17 +269,17 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Photo" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
-          <Property Name="Header" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Subtitle" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Subtitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ServicesDiv">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Icons" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Icons" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Header" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Testimony">
@@ -274,8 +291,16 @@
           <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="AuthorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
         <Association Name="FK_AboutDiv_AboutItems">
-          <End Role="AboutItems" Type="Self.AboutItem" Multiplicity="0..1" />
+          <End Role="AboutItems" Type="Self.AboutItems" Multiplicity="0..1" />
           <End Role="AboutDiv" Type="Self.AboutDiv" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AboutItems">
@@ -287,8 +312,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Blogs_AuthorNews">
-          <End Role="AuthorNews" Type="Self.AuthorNew" Multiplicity="0..1" />
-          <End Role="Blogs" Type="Self.Blog" Multiplicity="*" />
+          <End Role="AuthorNews" Type="Self.AuthorNews" Multiplicity="0..1" />
+          <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AuthorNews">
               <PropertyRef Name="ID" />
@@ -300,13 +325,13 @@
         </Association>
         <Association Name="FK_Blogs_BlogCategory">
           <End Role="BlogCategory" Type="Self.BlogCategory" Multiplicity="0..1" />
-          <End Role="Blogs" Type="Self.Blog" Multiplicity="*" />
+          <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BlogCategory">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Blogs">
-              <PropertyRef Name="CategoryID" />
+              <PropertyRef Name="CategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -323,31 +348,32 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="PortfolioDB" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AboutDivs" EntityType="Self.AboutDiv" />
-          <EntitySet Name="AboutItems" EntityType="Self.AboutItem" />
-          <EntitySet Name="AuthorNews" EntityType="Self.AuthorNew" />
-          <EntitySet Name="BlogCategories" EntityType="Self.BlogCategory" />
-          <EntitySet Name="Blogs" EntityType="Self.Blog" />
-          <EntitySet Name="CategoryWorks" EntityType="Self.CategoryWork" />
-          <EntitySet Name="MyWorksDivs" EntityType="Self.MyWorksDiv" />
+          <EntitySet Name="AboutDiv" EntityType="Self.AboutDiv" />
+          <EntitySet Name="AboutItems" EntityType="Self.AboutItems" />
+          <EntitySet Name="AuthorNews" EntityType="Self.AuthorNews" />
+          <EntitySet Name="BlogCategory" EntityType="Self.BlogCategory" />
+          <EntitySet Name="Blogs" EntityType="Self.Blogs" />
+          <EntitySet Name="CategoryWork" EntityType="Self.CategoryWork" />
+          <EntitySet Name="MyWorksDiv" EntityType="Self.MyWorksDiv" />
           <EntitySet Name="Section1Div" EntityType="Self.Section1Div" />
-          <EntitySet Name="ServicesDivs" EntityType="Self.ServicesDiv" />
-          <EntitySet Name="Testimonies" EntityType="Self.Testimony" />
+          <EntitySet Name="ServicesDiv" EntityType="Self.ServicesDiv" />
+          <EntitySet Name="Testimony" EntityType="Self.Testimony" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" />
           <AssociationSet Name="FK_AboutDiv_AboutItems" Association="Self.FK_AboutDiv_AboutItems">
             <End Role="AboutItems" EntitySet="AboutItems" />
-            <End Role="AboutDiv" EntitySet="AboutDivs" />
+            <End Role="AboutDiv" EntitySet="AboutDiv" />
           </AssociationSet>
           <AssociationSet Name="FK_Blogs_AuthorNews" Association="Self.FK_Blogs_AuthorNews">
             <End Role="AuthorNews" EntitySet="AuthorNews" />
             <End Role="Blogs" EntitySet="Blogs" />
           </AssociationSet>
           <AssociationSet Name="FK_Blogs_BlogCategory" Association="Self.FK_Blogs_BlogCategory">
-            <End Role="BlogCategory" EntitySet="BlogCategories" />
+            <End Role="BlogCategory" EntitySet="BlogCategory" />
             <End Role="Blogs" EntitySet="Blogs" />
           </AssociationSet>
           <AssociationSet Name="FK_MyWorksDiv_CategoryWork" Association="Self.FK_MyWorksDiv_CategoryWork">
-            <End Role="CategoryWork" EntitySet="CategoryWorks" />
-            <End Role="MyWorksDiv" EntitySet="MyWorksDivs" />
+            <End Role="CategoryWork" EntitySet="CategoryWork" />
+            <End Role="MyWorksDiv" EntitySet="MyWorksDiv" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -355,9 +381,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PortfoliomModelStoreContainer" CdmEntityContainer="PortfolioDB">
-          <EntitySetMapping Name="AboutDivs">
-            <EntityTypeMapping TypeName="PortfoliomModel.AboutDiv">
+        <EntityContainerMapping StorageEntityContainer="PortfolioModelStoreContainer" CdmEntityContainer="PortfolioDB">
+          <EntitySetMapping Name="AboutDiv">
+            <EntityTypeMapping TypeName="PortfolioModel.AboutDiv">
               <MappingFragment StoreEntitySet="AboutDiv">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
@@ -366,7 +392,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AboutItems">
-            <EntityTypeMapping TypeName="PortfoliomModel.AboutItem">
+            <EntityTypeMapping TypeName="PortfolioModel.AboutItems">
               <MappingFragment StoreEntitySet="AboutItems">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Icon" ColumnName="Icon" />
@@ -376,18 +402,18 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AuthorNews">
-            <EntityTypeMapping TypeName="PortfoliomModel.AuthorNew">
+            <EntityTypeMapping TypeName="PortfolioModel.AuthorNews">
               <MappingFragment StoreEntitySet="AuthorNews">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Fullame" ColumnName="Fullame" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="AuthorPhoto" ColumnName="AuthorPhoto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BlogCategories">
-            <EntityTypeMapping TypeName="PortfoliomModel.BlogCategory">
+          <EntitySetMapping Name="BlogCategory">
+            <EntityTypeMapping TypeName="PortfolioModel.BlogCategory">
               <MappingFragment StoreEntitySet="BlogCategory">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -395,28 +421,28 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Blogs">
-            <EntityTypeMapping TypeName="PortfoliomModel.Blog">
+            <EntityTypeMapping TypeName="PortfolioModel.Blogs">
               <MappingFragment StoreEntitySet="Blogs">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Header" ColumnName="Header" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Createdate" ColumnName="Createdate" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CategoryWorks">
-            <EntityTypeMapping TypeName="PortfoliomModel.CategoryWork">
+          <EntitySetMapping Name="CategoryWork">
+            <EntityTypeMapping TypeName="PortfolioModel.CategoryWork">
               <MappingFragment StoreEntitySet="CategoryWork">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MyWorksDivs">
-            <EntityTypeMapping TypeName="PortfoliomModel.MyWorksDiv">
+          <EntitySetMapping Name="MyWorksDiv">
+            <EntityTypeMapping TypeName="PortfolioModel.MyWorksDiv">
               <MappingFragment StoreEntitySet="MyWorksDiv">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
@@ -426,7 +452,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Section1Div">
-            <EntityTypeMapping TypeName="PortfoliomModel.Section1Div">
+            <EntityTypeMapping TypeName="PortfolioModel.Section1Div">
               <MappingFragment StoreEntitySet="Section1Div">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
@@ -436,8 +462,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ServicesDivs">
-            <EntityTypeMapping TypeName="PortfoliomModel.ServicesDiv">
+          <EntitySetMapping Name="ServicesDiv">
+            <EntityTypeMapping TypeName="PortfolioModel.ServicesDiv">
               <MappingFragment StoreEntitySet="ServicesDiv">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Icons" ColumnName="Icons" />
@@ -446,13 +472,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Testimonies">
-            <EntityTypeMapping TypeName="PortfoliomModel.Testimony">
+          <EntitySetMapping Name="Testimony">
+            <EntityTypeMapping TypeName="PortfolioModel.Testimony">
               <MappingFragment StoreEntitySet="Testimony">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Header" ColumnName="Header" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="AuthorName" ColumnName="AuthorName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="PortfolioModel.Settings">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -470,7 +505,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

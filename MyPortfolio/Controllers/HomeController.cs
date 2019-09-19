@@ -9,22 +9,20 @@ namespace MyPortfolio.Controllers
 {
     public class HomeController : Controller
     {
-        MyPortfolioDB DB = new MyPortfolioDB();
+        PortfolioDB DB = new PortfolioDB();
         public ActionResult Index()
         {
             ViewBag.Section1 = DB.Section1Div.Find(1);
             ViewBag.workCat = DB.CategoryWork.ToList();
             ViewBag.workList = DB.MyWorksDiv.ToList();
             ViewBag.service = DB.ServicesDiv.ToList();
+            ViewBag.about = DB.AboutItems.ToList();
+            ViewBag.aboutDv = DB.AboutDiv.Find(1);
+            ViewBag.testimonial = DB.Testimony.ToList();
+            ViewBag.blog = DB.Blogs.ToList();
             return View();
         }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
+       
 
         public ActionResult Contact()
         {

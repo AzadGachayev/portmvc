@@ -25,15 +25,16 @@ namespace MyPortfolio.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AboutDiv> AboutDivs { get; set; }
-        public virtual DbSet<AboutItem> AboutItems { get; set; }
-        public virtual DbSet<AuthorNew> AuthorNews { get; set; }
-        public virtual DbSet<BlogCategory> BlogCategories { get; set; }
-        public virtual DbSet<Blog> Blogs { get; set; }
-        public virtual DbSet<CategoryWork> CategoryWorks { get; set; }
-        public virtual DbSet<MyWorksDiv> MyWorksDivs { get; set; }
+        public virtual DbSet<AboutDiv> AboutDiv { get; set; }
+        public virtual DbSet<AboutItems> AboutItems { get; set; }
+        public virtual DbSet<AuthorNews> AuthorNews { get; set; }
+        public virtual DbSet<BlogCategory> BlogCategory { get; set; }
+        public virtual DbSet<Blogs> Blogs { get; set; }
+        public virtual DbSet<CategoryWork> CategoryWork { get; set; }
+        public virtual DbSet<MyWorksDiv> MyWorksDiv { get; set; }
         public virtual DbSet<Section1Div> Section1Div { get; set; }
-        public virtual DbSet<ServicesDiv> ServicesDivs { get; set; }
-        public virtual DbSet<Testimony> Testimonies { get; set; }
+        public virtual DbSet<ServicesDiv> ServicesDiv { get; set; }
+        public virtual DbSet<Testimony> Testimony { get; set; }
+        public virtual DbSet<Settings> Settings { get; set; }
     }
 }

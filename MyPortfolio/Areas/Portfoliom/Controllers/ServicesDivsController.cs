@@ -12,7 +12,7 @@ namespace MyPortfolio.Areas.Portfoliom.Controllers
 {
     public class ServicesDivsController : Controller
     {
-        private MyPortfolioDB db = new MyPortfolioDB();
+        private PortfolioDB db = new PortfolioDB();
 
         // GET: Portfoliom/ServicesDivs
         public ActionResult Index()

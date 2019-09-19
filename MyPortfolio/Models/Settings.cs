@@ -11,18 +11,17 @@ namespace MyPortfolio.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Blog
+    using System.ComponentModel.DataAnnotations;
+
+    public partial class Settings
     {
         public int ID { get; set; }
-        public string Header { get; set; }
-        public string Description { get; set; }
-        public string Photo { get; set; }
-        public Nullable<int> AuthorID { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
-        public Nullable<int> CategoryID { get; set; }
-    
-        public virtual AuthorNew AuthorNew { get; set; }
-        public virtual BlogCategory BlogCategory { get; set; }
+        [Required(ErrorMessage = "Email yazilmayib!")]
+        [EmailAddress]
+        public string Email { get; set; }
+        [MinLength(5)]
+        [MaxLength(50)]
+        [Required]
+        public string Password { get; set; }
     }
 }

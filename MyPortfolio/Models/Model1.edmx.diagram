@@ -4,21 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="182074e1b5ec40bd9e7025fdab0fd791" Name="Diagram1">
-        <EntityTypeShape EntityType="PortfoliomModel.AboutDiv" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="PortfoliomModel.AboutItem" Width="1.5" PointX="5.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="PortfoliomModel.AuthorNew" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PortfoliomModel.BlogCategory" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PortfoliomModel.Blog" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="PortfoliomModel.CategoryWork" Width="1.5" PointX="2.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PortfoliomModel.MyWorksDiv" Width="1.5" PointX="5" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="PortfoliomModel.Section1Div" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PortfoliomModel.ServicesDiv" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PortfoliomModel.Testimony" Width="1.5" PointX="4.75" PointY="7.75" IsExpanded="true" />
-        <AssociationConnector Association="PortfoliomModel.FK_AboutDiv_AboutItems" ManuallyRouted="false" />
-        <AssociationConnector Association="PortfoliomModel.FK_Blogs_AuthorNews" ManuallyRouted="false" />
-        <AssociationConnector Association="PortfoliomModel.FK_Blogs_BlogCategory" ManuallyRouted="false" />
-        <AssociationConnector Association="PortfoliomModel.FK_MyWorksDiv_CategoryWork" ManuallyRouted="false" />
+      <Diagram DiagramId="94b671052f6f4aa2bc8790e6025a42be" Name="Diagram1">
+        <EntityTypeShape EntityType="PortfolioModel.AboutDiv" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioModel.AboutItems" Width="1.5" PointX="5.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioModel.AuthorNews" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioModel.BlogCategory" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioModel.Blogs" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioModel.CategoryWork" Width="1.5" PointX="2.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioModel.MyWorksDiv" Width="1.5" PointX="5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioModel.Section1Div" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioModel.ServicesDiv" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioModel.Testimony" Width="1.5" PointX="4.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioModel.Settings" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="PortfolioModel.FK_AboutDiv_AboutItems" ManuallyRouted="false" />
+        <AssociationConnector Association="PortfolioModel.FK_Blogs_AuthorNews" ManuallyRouted="false" />
+        <AssociationConnector Association="PortfolioModel.FK_Blogs_BlogCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="PortfolioModel.FK_MyWorksDiv_CategoryWork" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

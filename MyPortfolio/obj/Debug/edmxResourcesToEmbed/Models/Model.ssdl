@@ -81,6 +81,16 @@
     <Property Name="Header" Type="nvarchar" MaxLength="150" />
     <Property Name="Description" Type="nvarchar" MaxLength="150" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Portfolio.dbo.Settings' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Settings">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Password" Type="nvarchar" MaxLength="250" />
+  </EntityType>
   <EntityType Name="Testimony">
     <Key>
       <PropertyRef Name="ID" />
@@ -149,6 +159,13 @@
     <EntitySet Name="Section1Div" EntityType="Self.Section1Div" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ServicesDiv" EntityType="Self.ServicesDiv" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Testimony" EntityType="Self.Testimony" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Settings" EntityType="Self.Settings" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Settings].[ID] AS [ID], 
+    [Settings].[Email] AS [Email], 
+    [Settings].[Password] AS [Password]
+    FROM [dbo].[Settings] AS [Settings]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_AboutDiv_AboutItems" Association="Self.FK_AboutDiv_AboutItems">
       <End Role="AboutItems" EntitySet="AboutItems" />
       <End Role="AboutDiv" EntitySet="AboutDiv" />

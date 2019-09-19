@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="PortfoliomModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="PortfolioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AboutDiv">
     <Key>
       <PropertyRef Name="ID" />
@@ -15,23 +15,23 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Icon" Type="nvarchar" MaxLength="50" />
     <Property Name="Header" Type="nvarchar" MaxLength="50" />
-    <Property Name="Description" Type="nvarchar" MaxLength="300" />
+    <Property Name="Description" Type="nvarchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="AuthorNews">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Fullame" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fullname" Type="nvarchar" MaxLength="50" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="Password" Type="nvarchar" MaxLength="250" />
-    <Property Name="AuthorPhoto" Type="nvarchar" MaxLength="800" />
+    <Property Name="AuthorPhoto" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="BlogCategory">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Blogs">
@@ -40,11 +40,11 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Header" Type="nvarchar" MaxLength="50" />
-    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar" MaxLength="150" />
     <Property Name="Photo" Type="nvarchar" MaxLength="800" />
     <Property Name="AuthorID" Type="int" />
-    <Property Name="CreateDate" Type="datetime" />
-    <Property Name="CategoryID" Type="int" />
+    <Property Name="Createdate" Type="datetime" />
+    <Property Name="CategoryId" Type="int" />
   </EntityType>
   <EntityType Name="CategoryWork">
     <Key>
@@ -59,7 +59,7 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Photo" Type="nvarchar" MaxLength="800" />
-    <Property Name="Title" Type="nvarchar" MaxLength="200" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
     <Property Name="CategoryID" Type="int" />
   </EntityType>
   <EntityType Name="Section1Div">
@@ -68,18 +68,28 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Photo" Type="nvarchar" MaxLength="800" />
-    <Property Name="Header" Type="nvarchar" MaxLength="150" />
-    <Property Name="Title" Type="nvarchar" MaxLength="150" />
-    <Property Name="Subtitle" Type="nvarchar" MaxLength="150" />
+    <Property Name="Header" Type="nvarchar" MaxLength="50" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+    <Property Name="Subtitle" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="ServicesDiv">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Icons" Type="nvarchar" MaxLength="50" />
-    <Property Name="Header" Type="nvarchar" MaxLength="50" />
+    <Property Name="Icons" Type="nvarchar" MaxLength="150" />
+    <Property Name="Header" Type="nvarchar" MaxLength="150" />
     <Property Name="Description" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Portfolio.dbo.Settings' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Settings">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Password" Type="nvarchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="Testimony">
     <Key>
@@ -122,7 +132,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Blogs">
-        <PropertyRef Name="CategoryID" />
+        <PropertyRef Name="CategoryId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -138,7 +148,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="PortfoliomModelStoreContainer">
+  <EntityContainer Name="PortfolioModelStoreContainer">
     <EntitySet Name="AboutDiv" EntityType="Self.AboutDiv" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AboutItems" EntityType="Self.AboutItems" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AuthorNews" EntityType="Self.AuthorNews" Schema="dbo" store:Type="Tables" />
@@ -149,6 +159,13 @@
     <EntitySet Name="Section1Div" EntityType="Self.Section1Div" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ServicesDiv" EntityType="Self.ServicesDiv" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Testimony" EntityType="Self.Testimony" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Settings" EntityType="Self.Settings" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Settings].[ID] AS [ID], 
+    [Settings].[Email] AS [Email], 
+    [Settings].[Password] AS [Password]
+    FROM [dbo].[Settings] AS [Settings]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_AboutDiv_AboutItems" Association="Self.FK_AboutDiv_AboutItems">
       <End Role="AboutItems" EntitySet="AboutItems" />
       <End Role="AboutDiv" EntitySet="AboutDiv" />
